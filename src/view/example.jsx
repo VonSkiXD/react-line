@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Xarrow, { useXarrow, Xwrapper } from 'react-xarrows';
+    import React, { useState } from 'react';
+    import Xarrow, { useXarrow, Xwrapper } from 'react-xarrows';
 
 export function V2Example() {
     const boxStyle = { border: 'grey solid 2px', borderRadius: '10px', padding: '5px' };

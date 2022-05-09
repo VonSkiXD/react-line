@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <font id="Iconify Explorer Font" horiz-adv-x="1000">
+    <font-face font-family="Iconify Explorer Font"
+      units-per-em="1000" ascent="1000"
+      descent="0" />
+    <missing-glyph horiz-adv-x="0" />
+    <glyph glyph-name="ic:sharp-arrow-right"
+      unicode="&#xE001;"
+      horiz-adv-x="1000" d="M416.6666666666667 291.6666666666668L625 500.0000000000001L416.6666666666667 708.3333333333334V291.6666666666668z" />
+    <glyph glyph-name="ic:twotone-arrow-drop-down"
+      unicode="&#xE002;"
+      horiz-adv-x="1000" d="M291.6666666666667 583.3333333333334L499.9999999999999 375L708.3333333333333 583.3333333333333H291.6666666666667z" />
+  </font>
+</defs>
+</svg>

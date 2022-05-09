@@ -1,12 +1,13 @@
-import './App.css'
-import {V2Example} from './example';
+// import './App.css'
+import {V2Example} from './view/example';
+import {ListExample} from './view/twoList';
 
 function App() {
 
   return (
     <div className="App">
       <header className="App-header">
-        <V2Example></V2Example>
+        <ListExample></ListExample>
       </header>
     </div>
   )
