@@ -162,12 +162,12 @@ export function ListExample() {
         return (
             tree.map((item) => (
                 <div key={side[0] + "h" + item.id} className='flex flex-col w-50 border-1 rounded-md border-gray-200'>
-                    <div id={side[0] + "h" + item.id} className='flex bg-gray-200 bg-opacity-75 p-1'>
+                    <div id={side[0] + "h" + item.id} className='flex bg-gray-200 bg-opacity-75 p-1 shadow-lg'>
                         <div onClick={() => clickRoot(item.id, side)} className={item.collapsed ? "i ic:sharp-arrow-right" : "i ic:twotone-arrow-drop-down"}></div>
                         {"root:" + item.id}
                     </div>
                     {!item.collapsed && item.list.map((l) => (
-                        <div key={side[0] + "s" + l.id} id={side[0] + "s" + l.id} className='pl-8 p-1 border-t-2 bg-gray-200 bg-opacity-75'
+                        <div key={side[0] + "s" + l.id} id={side[0] + "s" + l.id} className='pl-8 p-1 border-t-2 bg-gray-200 bg-opacity-75 hover:shadow-inner'
                             onDragStart={dropStart} onDrop={dropItem} onDragOver={allowDrop} draggable="true">
                             {"list:" + l.id}
                         </div>
