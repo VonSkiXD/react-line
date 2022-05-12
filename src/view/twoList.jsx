@@ -11,6 +11,7 @@ import "ace-builds/src-noconflict/ext-language_tools";
 import "@arco-design/web-react/dist/css/arco.css";
 import "./css/TreeList.css"
 import '../icon/arrow/iconfont.css';
+import { useReducer } from 'react';
 
 export function ListExample() {
     //左树
@@ -33,7 +34,8 @@ export function ListExample() {
     //箭头
     const [xarrows, setXarrows] = useState([]);
     //选中状态
-    const [selected, setSelected] = useState();
+    const [selected, setSelected] = useState({});
+    const [properties, setProperties] = useState({});
 
     //重新计算箭头位置
     const initXarrows = (maps) => {
@@ -101,16 +103,17 @@ export function ListExample() {
             }
         });
         if (!isExist) {
-            let newMap = [...map,{
+            let newMap = [...map, {
                 start: start.substring(2),
-                end: end.substring(2)
+                end: end.substring(2),
+                property:{}
             }];
             setMap(newMap);
             initXarrows(newMap);
         }
     }
 
-    const XarrowDiv = ({ setSelected, selected, xarrow }) => {
+    const XarrowDiv = ({ xarrow }) => {
         const [state, setState] = useState({
             color: 'gray',
         });
@@ -126,21 +129,19 @@ export function ListExample() {
                     }
                     let properties;
                     map.forEach(item => {
-                        if (item.start == selected.id.start.substring(2) && item.start == selected.id.start.substring(2)) {
+                        if (item.start == xarrow.start.substring(2) && item.end == xarrow.end.substring(2)) {
                             properties = { ...item.property };
                         }
                     })
-                    setSelected({
-                        id: { start: xarrow.start, end: xarrow.end },
-                        properties: properties,
-                    });
+                    setSelected({ start: xarrow.start, end: xarrow.end });
+                    setProperties(properties);
                 },
                 cursor: 'pointer',
             },
         };
         let color = state.color;
         let headSize = 4;
-        if (selected && selected.id.start === xarrow.start && selected.id.end === xarrow.end)
+        if (selected && selected.start === xarrow.start && selected.end === xarrow.end)
             color = 'red';
         return (
             <Xarrow {...{ ...defProps, headSize, color, ...xarrow }} />
@@ -175,46 +176,61 @@ export function ListExample() {
             ))
         )
     }
-    const PropertyDiv = ({ selected }) => {
-        let properties = selected?selected.properties:{};
-        const changeProperty = (key, event) => {
-            if (!selected) {
-                return;
-            }
-            console.log(key, event.target.value);
-            // setMap(newMap);
+    class PropertyDiv extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {...properties};
         }
-        return (
-            <div className={divTailwindcss + " pl-20 flex-col"}>
-                <Input
-                    className={'mb-2 w-80'}
-                    allowClear
-                    placeholder='属性1'
-                    onChange={(event) => changeProperty("property1", event)}
-                />
-                <Input
-                    className={'mb-2 w-80'}
-                    allowClear
-                    placeholder='属性2'
-                />
-                <Input
-                    className={'mb-2 w-80'}
-                    allowClear
-                    placeholder='属性3'
-                />
-                <AceEditor
-                    width='20rem'
-                    mode="java"
-                    theme="github"
-                    name="UNIQUE_ID_OF_DIV"
-                    editorProps={{ $blockScrolling: true }}
-                />
-            </div>
-        )
+        changeProperty = (key, event) => {
+            map.forEach(item => {
+                if (item.start === selected.start.substring(2) && item.end === selected.end.substring(2)) {
+                    item.property[key] = event;
+                }
+            });
+            this.setState({ ...this.state, [key]: event });
+            setMap(map);
+        }
+        render() {
+            const showP = this.state;
+            return (
+                <div className={divTailwindcss + " pl-20 flex-col"}>
+                    <Input
+                        className={'mb-2 w-80'}
+                        allowClear
+                        value={showP.p1}
+                        placeholder='属性1'
+                        onChange={(event) => this.changeProperty("p1", event)}
+                    />
+                    <Input
+                        className={'mb-2 w-80'}
+                        allowClear
+                        value={showP.p2}
+                        placeholder='属性2'
+                        onChange={(event) => this.changeProperty("p2", event)}
+                    />
+                    <Input
+                        className={'mb-2 w-80'}
+                        allowClear
+                        value={showP.p3}
+                        placeholder='属性3'
+                        onChange={(event) => this.changeProperty("p3", event)}
+                    />
+                    <AceEditor
+                        width='20rem'
+                        mode="java"
+                        theme="github"
+                        name="UNIQUE_ID_OF_DIV"
+                        value={showP.p4}
+                        onChange={(event) => this.changeProperty("p4", event)}
+                        editorProps={{ $blockScrolling: true }}
+                    />
+                </div>
+            )
+        }
     }
     const divTailwindcss = "basis-1/3 m-0 h-50 flex justify-center overflow-auto";
     return (
-        <div className="flex flex-row">
+        <div className="flex flex-row" >
             <Xwrapper>
                 <div className={divTailwindcss + " tree-list "} onScroll={updateXarrow}>
                     <div className="flex flex-col text-3xl">
@@ -226,11 +242,10 @@ export function ListExample() {
                         <TreeList side={"right"} tree={rightTree}></TreeList>
                     </div>
                 </div>
-                <PropertyDiv key="propertydiv" selected={selected} map={map} setMap={setMap} />
+                <PropertyDiv key="propertydiv"
+                />
                 {xarrows.map((xarrow, index) =>
                     <XarrowDiv key={index}
-                        selected={selected}
-                        setSelected={setSelected}
                         xarrow={xarrow} />
                 )}
             </Xwrapper>
