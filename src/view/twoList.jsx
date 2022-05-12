@@ -179,7 +179,7 @@ export function ListExample() {
     class PropertyDiv extends React.Component {
         constructor(props) {
             super(props);
-            this.state = {...properties};
+            this.state = properties;
         }
         changeProperty = (key, event) => {
             map.forEach(item => {
