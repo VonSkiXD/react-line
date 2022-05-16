@@ -2,13 +2,13 @@
 
 import {V2Example} from './view/example';
 import {ListExample} from './view/twoList';
-import {TreeListDemo} from './view/treeList';
+import {ListExample2} from './view/twoList2';
 function App() {
 
   return (
     <div className="App">
       <header className="App-header">
-        <ListExample key="example"></ListExample>
+        <ListExample2></ListExample2>
       </header>
     </div>
   )
