@@ -15,21 +15,399 @@ import '../icon/arrow/iconfont.css';
 export function ListExample() {
     //左树
     const [leftTree, setLeftTree] = useState([
-        { id: 'lh1', collapsed: false, list: [{ id: 'ls1' }, { id: 'ls2' }] },
-        { id: 'lh2', collapsed: false, list: [{ id: 'ls3' }, { id: 'ls4' }] }
+        {
+            "children": [
+                {
+                    "children": [
+                        {
+                            "collapsed": false,
+                            "id": "rfG-u7obRlB0cvyw3wpwS",
+                            "leaf": true,
+                            "name": "name0-0-0-0",
+                            "position": "0-0-0-0"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "Tve0eeMXHmA3U19_EGcHi",
+                            "leaf": true,
+                            "name": "name1",
+                            "position": "0-0-0-1"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "2S4vEdEtHOi4xGAuuGLBt",
+                            "leaf": true,
+                            "name": "name2",
+                            "position": "0-0-0-2"
+                        }
+                    ],
+                    "collapsed": false,
+                    "id": "vPUFfTo7qFr1mgNyz9nY-",
+                    "leaf": false,
+                    "name": "name0-0-0",
+                    "position": "0-0-0"
+                },
+                {
+                    "children": [
+                        {
+                            "collapsed": false,
+                            "id": "Fe9t_qWs_mXcaEDa8j76M",
+                            "leaf": true,
+                            "name": "name0",
+                            "position": "0-0-1-0"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "DjTL6zZqX800Tcy6OfLuU",
+                            "leaf": true,
+                            "name": "name1",
+                            "position": "0-0-1-1"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "Lb7xMmLhaQWUF1hqnbe9H",
+                            "leaf": true,
+                            "name": "name2",
+                            "position": "0-0-1-2"
+                        }
+                    ],
+                    "collapsed": false,
+                    "id": "n9fgJvD1ZyFEJQi87157c",
+                    "leaf": false,
+                    "name": "name1",
+                    "position": "0-0-1"
+                },
+                {
+                    "children": [
+                        {
+                            "collapsed": false,
+                            "id": "aUaAMea0fiFYfZuR33geq",
+                            "leaf": true,
+                            "name": "name0",
+                            "position": "0-0-2-0"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "MZ-Tr4_Nr7eqDjM_wvPAe",
+                            "leaf": true,
+                            "name": "name1",
+                            "position": "0-0-2-1"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "nFzJG1MrsHXDrNKrW9TUK",
+                            "leaf": true,
+                            "name": "name2",
+                            "position": "0-0-2-2"
+                        }
+                    ],
+                    "collapsed": false,
+                    "id": "WnibWxlAqVQHIFYZXwZ0-",
+                    "leaf": false,
+                    "name": "name2",
+                    "position": "0-0-2"
+                }
+            ],
+            "collapsed": false,
+            "id": "hdms0kAtYTyP0f0Lp-WrT",
+            "leaf": false,
+            "name": "name:0",
+            "position": "0-0"
+        },
+        {
+            "children": [
+                {
+                    "children": [
+                        {
+                            "collapsed": false,
+                            "id": "iEEqmOwvSgZjzaHl3tcQy",
+                            "leaf": true,
+                            "name": "name0",
+                            "position": "0-1-0-0"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "RwPDH7TM-WEKcIURs59L_",
+                            "leaf": true,
+                            "name": "name1",
+                            "position": "0-1-0-1"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "UXHvvugZxrOcI-Aq389Fw",
+                            "leaf": true,
+                            "name": "name2",
+                            "position": "0-1-0-2"
+                        }
+                    ],
+                    "collapsed": false,
+                    "id": "tidjCZw9z798Jh2vG0UkE",
+                    "leaf": false,
+                    "name": "name0",
+                    "position": "0-1-0"
+                },
+                {
+                    "children": [
+                        {
+                            "collapsed": false,
+                            "id": "s_dAvgEvxuGnbCdTPtObQ",
+                            "leaf": true,
+                            "name": "name0",
+                            "position": "0-1-1-0"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "L8Ebf1-xFxE2Y1dw3fil0",
+                            "leaf": true,
+                            "name": "name1",
+                            "position": "0-1-1-1"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "gRUqDAhNYWGgbTic0oKYL",
+                            "leaf": true,
+                            "name": "name2",
+                            "position": "0-1-1-2"
+                        }
+                    ],
+                    "collapsed": false,
+                    "id": "l6KihMpN7f-E27ZFz25js",
+                    "leaf": false,
+                    "name": "name1",
+                    "position": "0-1-1"
+                },
+                {
+                    "children": [
+                        {
+                            "collapsed": false,
+                            "id": "I4xeA4imaUE7xByXCYJ46",
+                            "leaf": true,
+                            "name": "name0",
+                            "position": "0-1-2-0"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "SMPeIFwSU3l66aoB_sDDT",
+                            "leaf": true,
+                            "name": "name1",
+                            "position": "0-1-2-1"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "pKEnPAcEwBBX7xeU_YZ9C",
+                            "leaf": true,
+                            "name": "name2",
+                            "position": "0-1-2-2"
+                        }
+                    ],
+                    "collapsed": false,
+                    "id": "PXNUaX4yeBq6CsAejdPq-",
+                    "leaf": false,
+                    "name": "name2",
+                    "position": "0-1-2"
+                }
+            ],
+            "collapsed": false,
+            "id": "XfH8t4OnLPXneVFvDTAsX",
+            "leaf": false,
+            "name": "name:1",
+            "position": "0-1"
+        },
+        {
+            "children": [
+                {
+                    "children": [
+                        {
+                            "collapsed": false,
+                            "id": "SIJ76gcLw454Nq64cr-cb",
+                            "leaf": true,
+                            "name": "name0",
+                            "position": "0-2-0-0"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "t4DIszPRdg2GjNvlYdr_D",
+                            "leaf": true,
+                            "name": "name1",
+                            "position": "0-2-0-1"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "utAlNg6bmDoc38mX6XUk0",
+                            "leaf": true,
+                            "name": "name2",
+                            "position": "0-2-0-2"
+                        }
+                    ],
+                    "collapsed": false,
+                    "id": "h-fJZJWADx488XLMKaqDm",
+                    "leaf": false,
+                    "name": "name0",
+                    "position": "0-2-0"
+                },
+                {
+                    "children": [
+                        {
+                            "collapsed": false,
+                            "id": "dQbDBLh3q_WpGdy1CL2jy",
+                            "leaf": true,
+                            "name": "name0",
+                            "position": "0-2-1-0"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "ZRbOJOus2KTLmw9TIRyvX",
+                            "leaf": true,
+                            "name": "name1",
+                            "position": "0-2-1-1"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "DmqsyNznDjcXqff-Ltj6T",
+                            "leaf": true,
+                            "name": "name2",
+                            "position": "0-2-1-2"
+                        }
+                    ],
+                    "collapsed": false,
+                    "id": "Y83B8Lc1Tw2jwlKFG9szg",
+                    "leaf": false,
+                    "name": "name1",
+                    "position": "0-2-1"
+                },
+                {
+                    "children": [
+                        {
+                            "collapsed": false,
+                            "id": "jrz-1loRm3Q1nNbpq6ac9",
+                            "leaf": true,
+                            "name": "name0",
+                            "position": "0-2-2-0"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "4rH8Z3bhG9ARqcj-n4JsH",
+                            "leaf": true,
+                            "name": "name1",
+                            "position": "0-2-2-1"
+                        },
+                        {
+                            "collapsed": false,
+                            "id": "JoJ-frjSrJQHHNTsLCll1",
+                            "leaf": true,
+                            "name": "name2",
+                            "position": "0-2-2-2"
+                        }
+                    ],
+                    "collapsed": false,
+                    "id": "9D1QMT1Dz6aKTXFCfDLCL",
+                    "leaf": false,
+                    "name": "name2",
+                    "position": "0-2-2"
+                }
+            ],
+            "collapsed": false,
+            "id": "17GwpCqapqjCBqPSvjDdN",
+            "leaf": false,
+            "name": "name:2",
+            "position": "0-2"
+        }
     ]);
     //右树
     const [rightTree, setRightTree] = useState([
-        { id: 'rh1', collapsed: false, list: [{ id: 'rs1' }, { id: 'rs2' }] },
-        { id: 'rh2', collapsed: false, list: [{ id: 'rs3' }, { id: 'rs4' }] },
-        { id: 'rh3', collapsed: false, list: [{ id: 'rs5' }, { id: 'rs6' }] },
-        { id: 'rh4', collapsed: false, list: [{ id: 'rs7' }, { id: 'rs8' }] },
+        {
+            "children": [
+                {
+                    "collapsed": false,
+                    "id": "M0tryFq5SSntdSGMDOm13",
+                    "leaf": true,
+                    "name": "name0",
+                    "position": "0-0-0"
+                },
+                {
+                    "collapsed": false,
+                    "id": "Hw2BjKFzIlJjW0dWPFJL7",
+                    "leaf": true,
+                    "name": "name1",
+                    "position": "0-0-1"
+                },
+                {
+                    "collapsed": false,
+                    "id": "57K0jZT8yzmjsuiy4IM2c",
+                    "leaf": true,
+                    "name": "name2",
+                    "position": "0-0-2"
+                }
+            ],
+            "collapsed": false,
+            "id": "r7kTpPav4pSM5UKNtO05J",
+            "leaf": false,
+            "name": "name:0",
+            "position": "0-0"
+        },
+        {
+            "children": [
+                {
+                    "collapsed": false,
+                    "id": "6OU7Pw2pGpVp5KguU-yLC",
+                    "leaf": true,
+                    "name": "name0",
+                    "position": "0-1-0"
+                },
+                {
+                    "collapsed": false,
+                    "id": "zK-6dneuWoe4ylod5Ne-w",
+                    "leaf": true,
+                    "name": "name1",
+                    "position": "0-1-1"
+                },
+                {
+                    "collapsed": false,
+                    "id": "WN9fcXpIiMJCMsolxPm8D",
+                    "leaf": true,
+                    "name": "name2",
+                    "position": "0-1-2"
+                }
+            ],
+            "collapsed": false,
+            "id": "oFDmKa4UlmnskVYwnm9_T",
+            "leaf": false,
+            "name": "name:1",
+            "position": "0-1"
+        },
+        {
+            "children": [
+                {
+                    "collapsed": false,
+                    "id": "HE2uD4pbQykcGqm4qZbE0",
+                    "leaf": true,
+                    "name": "name0",
+                    "position": "0-2-0"
+                },
+                {
+                    "collapsed": false,
+                    "id": "ZT894E0WJXjyEWBXQUVW7",
+                    "leaf": true,
+                    "name": "name1",
+                    "position": "0-2-1"
+                },
+                {
+                    "collapsed": false,
+                    "id": "T6Or1m5HDMPttzE95am54",
+                    "leaf": true,
+                    "name": "name2",
+                    "position": "0-2-2"
+                }
+            ],
+            "collapsed": false,
+            "id": "UVwPQiuj2c2wvbsiGGpKL",
+            "leaf": false,
+            "name": "name:2",
+            "position": "0-2"
+        }
     ]);
     //映射关系
-    const [map, setMap] = useState([
-        { start: 'ls1', end: 'rs1', property: {} },
-        { start: 'ls2', end: 'rs2', property: {} },
-    ]);
+    const [map, setMap] = useState([]);
     //箭头
     const [xarrows, setXarrows] = useState([]);
     //选中状态
@@ -40,33 +418,70 @@ export function ListExample() {
     const initXarrows = (maps) => {
         let newXarrows = [];
         maps.forEach(item => {
-            let s = "ls" + item.start;
-            let e = "rs" + item.end;
-            //左树循环
-            leftTree.forEach((t) => {
-                for (const l of t.list) {
-                    if (l.id === item.start) {
-                        if (t.collapsed) {
-                            s = "lh" + t.id;
-                        }
+            let s = item.start;
+            let e = item.end;
+
+            //获取位置
+            function getPosition(tree, id) {
+                let position;
+                for(const t of tree) {
+                    if(t.id ===id){
+                        position = t.position;
                         break;
                     }
-                }
-            });
-            //右树循环
-            rightTree.forEach((t) => {
-                for (const l of t.list) {
-                    if (l.id === item.end) {
-                        if (t.collapsed) {
-                            e = "rh" + t.id;
+                    function getP(target) {
+                        let p;
+                        if (target.id === id) {
+                            p = target.position;
+                        } else if (target.children&&target.children.length > 0) {
+                            for (const c of target.children) {
+                                p=getP(c)
+                                if(p){
+                                    break;
+                                }
+                            }
                         }
+                        return p;
+                    }
+                    position=getP(t);
+                    if (position!==undefined) {
                         break;
                     }
+                };
+                return position;
+            }
+            const leftPosition = getPosition(leftTree, s);
+            const rightPosition = getPosition(rightTree, e);
+            //获取箭头位置
+            function getArrowPosition(position, tree) {
+                let arrowId;
+                let isLeaf;
+                const indexs = position.split('-');
+                let deepTree = tree;
+                for (var i = 1; i < indexs.length; i++) {
+                    if (deepTree[indexs[i]].collapsed === true) {
+                        arrowId = deepTree[indexs[i]].id;
+                        isLeaf = deepTree[indexs[i]].leaf;
+                        break;
+                    } else {
+                        if (i === indexs.length - 1) {
+                            arrowId = deepTree[indexs[i]].id;
+                            isLeaf = deepTree[indexs[i]].leaf;
+                        } else {
+                            deepTree = deepTree[indexs[i]].children;
+                        }
+                    }
                 }
-            });
+                return {id:arrowId,isLeaf:isLeaf};
+            }
+
+            s = getArrowPosition(leftPosition, leftTree);
+            e = getArrowPosition(rightPosition, rightTree);
+
             newXarrows.push({
-                start: s,
-                end: e
+                start: s.id,
+                end: e.id,
+                isLeaf:s.isLeaf&&e.isLeaf
             });
         });
         setXarrows(newXarrows);
@@ -75,42 +490,7 @@ export function ListExample() {
     useEffect(() => {
         initXarrows(map);
     }, []);
-    const dropStart = (event) => {
-        event.dataTransfer.setData("dropId", event.target.id);
-    }
-    const allowDrop = (event) => {
-        event.preventDefault();
-    }
-
     const updateXarrow = useXarrow();
-    const dropItem = (event) => {
-        event.preventDefault();
-        var dropId = event.dataTransfer.getData("dropId");
-        if (dropId[0] === 'l') {
-            var start = event.dataTransfer.getData("dropId");
-            var end = event.target.id;
-        } else {
-            var start = event.target.id;
-            var end = event.dataTransfer.getData("dropId");
-        }
-        if (start[0] == end[0]) return;
-
-        let isExist = false;
-        map.forEach(item => {
-            if (item.start === start.substring(2) && item.end === end.substring(2)) {
-                isExist = true;
-            }
-        });
-        if (!isExist) {
-            let newMap = map.push({
-                start: start.substring(2),
-                end: end.substring(2),
-                property: {}
-            });
-            setMap(newMap);
-            initXarrows(newMap);
-        }
-    }
 
     const XarrowDiv = ({ xarrow }) => {
         const [state, setState] = useState({
@@ -123,12 +503,12 @@ export function ListExample() {
                 onMouseLeave: () => setState({ color: 'gray' }),
                 onClick: (e) => {
                     e.stopPropagation(); //so only the click event on the box will fire on not on the container itself
-                    if (xarrow.start[1] === 'h' || xarrow.end[1] === 'h') {
+                    if (!xarrow.isLeaf) {
                         return;
                     }
                     let properties;
                     map.forEach(item => {
-                        if (item.start == xarrow.start.substring(2) && item.end == xarrow.end.substring(2)) {
+                        if (item.start == xarrow.start && item.end == xarrow.end) {
                             properties = { ...item.property };
                         }
                     })
@@ -140,39 +520,96 @@ export function ListExample() {
         };
         let color = state.color;
         let headSize = 4;
+        const zIndex = 0;
         if (selected && selected.start === xarrow.start && selected.end === xarrow.end)
             color = 'red';
         return (
-            <Xarrow {...{ ...defProps, headSize, color, ...xarrow }} />
+            <Xarrow {...{ ...defProps, headSize, color, ...xarrow,zIndex }} />
         );
     }
-    const TreeList = ({ side, tree }) => {
-        const clickRoot = (id, side) => {
+    const TreeNode = ({ id, position, name, children, leaf, collapsed, side }) => {
+        const clickRoot = (id, position, side) => {
             let tree = side === 'left' ? leftTree : rightTree;
             let setTree = side === 'left' ? setLeftTree : setRightTree;
-            tree.forEach((t) => {
-                if (t.id === id) {
-                    t.collapsed = !t.collapsed;
+            var indexs = position.split('-');
+            var p = tree;
+            for (var i = 1; i < indexs.length; i++) {
+                if (i === indexs.length - 1) {
+                    p[parseInt(indexs[i])].collapsed = !p[parseInt(indexs[i])].collapsed;
+                } else {
+                    p = p[parseInt(indexs[i])].children
                 }
-            });
+            }
             setTree(tree);
             initXarrows(map);
         }
+        const dropStart = (event) => {
+            event.dataTransfer.setData("dropId", event.target.id);
+            event.dataTransfer.setData("dropSide", side);
+        }
+        const allowDrop = (event) => {
+            event.preventDefault();
+        }
+
+        const dropItem = (event) => {
+            event.preventDefault();
+            var dropId = event.dataTransfer.getData("dropId");
+            var fromSide = event.dataTransfer.getData("dropSide");
+
+            if (fromSide == side) return;
+
+            if (fromSide === 'left') {
+                var start = dropId;
+                var end = event.target.id;
+            } else {
+                var start = event.target.id;
+                var end = dropId;
+            }
+
+            let isExist = false;
+            map.forEach(item => {
+                if (item.start === start && item.end === end) {
+                    isExist = true;
+                }
+            });
+            if (!isExist) {
+                map.push({
+                    start: start,
+                    end: end,
+                    property: {}
+                });
+                setMap(map);
+                initXarrows(map);
+            }
+        }
+        const spaceLeft = (position) => {
+            return position.split('-').length;
+        }
         return (
-            tree.map((item) => (
-                <div key={side[0] + "h" + item.id} className='flex flex-col w-50 border-1 rounded-md border-gray-200'>
-                    <div id={side[0] + "h" + item.id} className='flex bg-gray-200 bg-opacity-75 p-1 shadow-lg'>
-                        <div onClick={() => clickRoot(item.id, side)} className={item.collapsed ? "i ic:sharp-arrow-right" : "i ic:twotone-arrow-drop-down"}></div>
-                        {"root:" + item.id}
+            <div >
+                {
+                    !leaf && id != 'root' &&
+                    <div key={id} id={id} className='flex bg-gray-200 bg-opacity-75 p-1 shadow-lg'
+                        style={{ paddingLeft: spaceLeft(position) + 'rem' }}>
+                        <div onClick={() => clickRoot(id, position, side)} className={collapsed ? "i ic:sharp-arrow-right" : "i ic:twotone-arrow-drop-down"}></div>
+                        {name}
                     </div>
-                    {!item.collapsed && item.list.map((l) => (
-                        <div key={side[0] + "s" + l.id} id={side[0] + "s" + l.id} className='pl-8 p-1 border-t-2 bg-gray-200 bg-opacity-75 hover:shadow-inner'
-                            onDragStart={dropStart} onDrop={dropItem} onDragOver={allowDrop} draggable="true">
-                            {"list:" + l.id}
-                        </div>
-                    ))}
-                </div>
-            ))
+                }
+                {
+                    leaf &&
+                    <div key={id} id={id} className='p-1  bg-gray-200 bg-opacity-75 hover:shadow-inner'
+                        style={{ paddingLeft: spaceLeft(position) + 2 + 'rem' }}
+                        onDragStart={dropStart} onDrop={dropItem} onDragOver={allowDrop} draggable="true">
+                        {name}
+                    </div>
+                }
+                {
+                    !collapsed && !leaf &&
+                    children.map(({ id, position, name, children, leaf, collapsed }) => (
+                        <TreeNode key={id} id={id} position={position} name={name} children={children} leaf={leaf} collapsed={collapsed} side={side} />
+                    ))
+                }
+            </div>
         )
     }
     class PropertyDiv extends React.Component {
@@ -182,7 +619,7 @@ export function ListExample() {
         }
         changeProperty = (key, event) => {
             map.forEach(item => {
-                if (item.start === selected.start.substring(2) && item.end === selected.end.substring(2)) {
+                if (item.start === selected.start && item.end === selected.end) {
                     item.property[key] = event;
                 }
             });
@@ -232,13 +669,13 @@ export function ListExample() {
         <div className="flex flex-row" >
             <Xwrapper>
                 <div className={divTailwindcss + " tree-list "} onScroll={updateXarrow}>
-                    <div className="flex flex-col text-3xl">
-                        <TreeList side={"left"} tree={leftTree}></TreeList>
+                    <div className="flex flex-col text-3xl w-80 ">
+                        <TreeNode id="root" position={"0"} name="根" children={leftTree} isLeaf={false} isCollapsed={false} side="left" />
                     </div>
                 </div>
                 <div className={divTailwindcss + " tree-list "} onScroll={updateXarrow}>
-                    <div className="flex flex-col text-3xl">
-                        <TreeList side={"right"} tree={rightTree}></TreeList>
+                    <div className="flex flex-col text-3xl w-80">
+                        <TreeNode id="root" position={"0"} name="根" children={rightTree} isLeaf={false} isCollapsed={false} side="right" />
                     </div>
                 </div>
                 <PropertyDiv key="propertydiv"
