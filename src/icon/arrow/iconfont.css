@@ -20,11 +20,39 @@
 }
 
 
-.i.ic\:sharp-arrow-right:before {
+.i.ic\:baseline-search:before {
 content: "\e001";
 }
 
-.i.ic\:twotone-arrow-drop-down:before {
+.i.ic\:sharp-arrow-right:before {
 content: "\e002";
+}
+
+.i.ic\:twotone-arrow-drop-down:before {
+content: "\e003";
+}
+
+.i.material-symbols\:folder-sharp:before {
+content: "\e004";
+}
+
+.i.material-symbols\:save:before {
+content: "\e005";
+}
+
+.i.mdi\:link-variant:before {
+content: "\e006";
+}
+
+.i.mdi\:link-variant-off:before {
+content: "\e007";
+}
+
+.i.mdi\:sitemap:before {
+content: "\e008";
+}
+
+.i.mdi\:sitemap-outline:before {
+content: "\e009";
 }
 

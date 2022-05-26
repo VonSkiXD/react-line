@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Xarrow, { useXarrow, Xwrapper } from 'react-xarrows';
-import { Input } from '@arco-design/web-react';
+import { Input, Tooltip } from '@arco-design/web-react';
+
+import { nanoid } from 'nanoid'
 
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-java";
@@ -411,9 +413,15 @@ export function ListExample() {
     //箭头
     const [xarrows, setXarrows] = useState([]);
     //选中状态
+    const [hoverArrow,setHoverArrow] = useState(null);
     const [selected, setSelected] = useState({});
     const [properties, setProperties] = useState({});
+    //组属性
+    const [groupProperties,setGroupProperties] = useState([]);
 
+    const isEmptyStr = (str) => {
+        return str === '' || str === null || str === undefined;
+    }
     //重新计算箭头位置
     const initXarrows = (maps) => {
         let newXarrows = [];
@@ -424,27 +432,30 @@ export function ListExample() {
             //获取位置
             function getPosition(tree, id) {
                 let position;
-                for(const t of tree) {
-                    if(t.id ===id){
+
+                function getP(target) {
+                    let p;
+                    if (target.id === id) {
+                        p = target.position;
+                    } else if (target.children && target.children.length > 0) {
+                        for (const c of target.children) {
+                            p = getP(c)
+                            if (p) {
+                                break;
+                            }
+                        }
+                    }
+                    return p;
+                }
+
+                for (const t of tree) {
+                    if (t.id === id) {
                         position = t.position;
                         break;
                     }
-                    function getP(target) {
-                        let p;
-                        if (target.id === id) {
-                            p = target.position;
-                        } else if (target.children&&target.children.length > 0) {
-                            for (const c of target.children) {
-                                p=getP(c)
-                                if(p){
-                                    break;
-                                }
-                            }
-                        }
-                        return p;
-                    }
-                    position=getP(t);
-                    if (position!==undefined) {
+
+                    position = getP(t);
+                    if (position !== undefined) {
                         break;
                     }
                 };
@@ -472,7 +483,7 @@ export function ListExample() {
                         }
                     }
                 }
-                return {id:arrowId,isLeaf:isLeaf};
+                return { id: arrowId, isLeaf: isLeaf };
             }
 
             s = getArrowPosition(leftPosition, leftTree);
@@ -481,7 +492,8 @@ export function ListExample() {
             newXarrows.push({
                 start: s.id,
                 end: e.id,
-                isLeaf:s.isLeaf&&e.isLeaf
+                isLeaf: s.isLeaf && e.isLeaf,
+                group: item.group
             });
         });
         setXarrows(newXarrows);
@@ -493,42 +505,35 @@ export function ListExample() {
     const updateXarrow = useXarrow();
 
     const XarrowDiv = ({ xarrow }) => {
-        const [state, setState] = useState({
-            color: 'gray',
-        });
         const defProps = {
             passProps: {
                 className: 'xarrow',
-                onMouseEnter: () => setState({ color: 'IndianRed' }),
-                onMouseLeave: () => setState({ color: 'gray' }),
+                onMouseEnter: () => {setHoverArrow(xarrow.group);console.log('in');},
+                onMouseLeave: () => {setHoverArrow(null);console.log('out');},
                 onClick: (e) => {
-                    e.stopPropagation(); //so only the click event on the box will fire on not on the container itself
+                    e.stopPropagation();
                     if (!xarrow.isLeaf) {
                         return;
                     }
-                    let properties;
-                    map.forEach(item => {
-                        if (item.start == xarrow.start && item.end == xarrow.end) {
-                            properties = { ...item.property };
-                        }
-                    })
-                    setSelected({ start: xarrow.start, end: xarrow.end });
-                    setProperties(properties);
+                    setSelected({ group: xarrow.group });
+                    setProperties(groupProperties.find(item =>item.group === xarrow.group));
                 },
                 cursor: 'pointer',
             },
         };
-        let color = state.color;
+        let color = '#5F5F5F';
         let headSize = 4;
         const zIndex = 0;
-        if (selected && selected.start === xarrow.start && selected.end === xarrow.end)
-            color = 'red';
+        if (selected && selected.group === xarrow.group)
+            color = '#5079F8';
+        if (hoverArrow && hoverArrow === xarrow.group)
+            color = '#11279A';
         return (
-            <Xarrow {...{ ...defProps, headSize, color, ...xarrow,zIndex }} />
+            <Xarrow {...{ ...defProps, headSize, color, ...xarrow, zIndex }} />
         );
     }
     const TreeNode = ({ id, position, name, children, leaf, collapsed, side }) => {
-        const clickRoot = (id, position, side) => {
+        const clickRoot = (position, side) => {
             let tree = side === 'left' ? leftTree : rightTree;
             let setTree = side === 'left' ? setLeftTree : setRightTree;
             var indexs = position.split('-');
@@ -543,9 +548,17 @@ export function ListExample() {
             setTree(tree);
             initXarrows(map);
         }
-        const dropStart = (event) => {
-            event.dataTransfer.setData("dropId", event.target.id);
+        const dropStartSelected = (event) => {
+            event.dataTransfer.setData("group", selected.group);
+            event.dataTransfer.setData("dropId", id);
             event.dataTransfer.setData("dropSide", side);
+            event.dataTransfer.setData("dropLeaf", leaf);
+        }
+        const dropStartNew = (event) => {
+            event.dataTransfer.setData("dropId", id);
+            event.dataTransfer.setData("dropSide", side);
+            event.dataTransfer.setData("dropLeaf", leaf);
+            event.dataTransfer.setData("group", nanoid());
         }
         const allowDrop = (event) => {
             event.preventDefault();
@@ -555,14 +568,20 @@ export function ListExample() {
             event.preventDefault();
             var dropId = event.dataTransfer.getData("dropId");
             var fromSide = event.dataTransfer.getData("dropSide");
+            var group = event.dataTransfer.getData("group");
+            
+            //强行拖动问题
+            if(dropId==null||dropId===""||group==null||group===""){
+                return;
+            }
 
             if (fromSide == side) return;
 
             if (fromSide === 'left') {
                 var start = dropId;
-                var end = event.target.id;
+                var end = id;
             } else {
-                var start = event.target.id;
+                var start = id;
                 var end = dropId;
             }
 
@@ -576,9 +595,17 @@ export function ListExample() {
                 map.push({
                     start: start,
                     end: end,
-                    property: {}
+                    group: group
+                });
+                groupProperties.push({
+                    group:group,
+                    p1:'',
+                    p2:'',
+                    p3:'',
+                    p4:''
                 });
                 setMap(map);
+                setGroupProperties(groupProperties);
                 initXarrows(map);
             }
         }
@@ -590,17 +617,27 @@ export function ListExample() {
                 {
                     !leaf && id != 'root' &&
                     <div key={id} id={id} className='flex bg-gray-200 bg-opacity-75 p-1 shadow-lg'
-                        style={{ paddingLeft: spaceLeft(position) + 'rem' }}>
-                        <div onClick={() => clickRoot(id, position, side)} className={collapsed ? "i ic:sharp-arrow-right" : "i ic:twotone-arrow-drop-down"}></div>
+                        style={{ paddingLeft: spaceLeft(position) + 'rem' }}
+                        onClick={() => clickRoot(position, side)}>
+                        <i className={collapsed ? "i ic:sharp-arrow-right" : "i ic:twotone-arrow-drop-down"}></i>
+                        <i className='i material-symbols:folder-sharp'></i>
                         {name}
                     </div>
                 }
                 {
                     leaf &&
-                    <div key={id} id={id} className='p-1  bg-gray-200 bg-opacity-75 hover:shadow-inner'
-                        style={{ paddingLeft: spaceLeft(position) + 2 + 'rem' }}
-                        onDragStart={dropStart} onDrop={dropItem} onDragOver={allowDrop} draggable="true">
-                        {name}
+                    <div key={id} id={id} className='p-1  bg-gray-200 bg-opacity-75 hover:shadow-inner flex'
+                        style={{ paddingLeft: spaceLeft(position) + 2.8 + 'rem' }}
+                        onDrop={dropItem} onDragOver={allowDrop}>
+                        <div className='flex-grow'>{name}</div>
+                        <Tooltip trigger='hover' mini content='在已选择连接组下建立连接'>
+                            <i className={'i mdi:link-variant  flex-none rounded-lg hover:bg-gray-300'+''+(isEmptyStr(selected.group)?' text-gray-500':'')}
+                                onDragStart={dropStartSelected} draggable={isEmptyStr(selected.group)?"false":"true"}></i>
+                        </Tooltip>
+                        <Tooltip trigger='hover' mini content='创建新连接组并建立连接'>
+                            <i className='i mdi:sitemap-outline ml-1 flex-none rounded-lg hover:bg-gray-300'
+                                onDragStart={dropStartNew} draggable={"true"}></i>
+                        </Tooltip>
                     </div>
                 }
                 {
@@ -618,13 +655,13 @@ export function ListExample() {
             this.state = properties;
         }
         changeProperty = (key, event) => {
-            map.forEach(item => {
-                if (item.start === selected.start && item.end === selected.end) {
+            groupProperties.forEach(item => {
+                if (item.group === selected.group) {
                     item.property[key] = event;
                 }
             });
             this.setState({ ...this.state, [key]: event });
-            setMap(map);
+            setGroupProperties(groupProperties);
         }
         render() {
             const showP = this.state;
@@ -669,12 +706,12 @@ export function ListExample() {
         <div className="flex flex-row" >
             <Xwrapper>
                 <div className={divTailwindcss + " tree-list "} onScroll={updateXarrow}>
-                    <div className="flex flex-col text-3xl w-80 ">
+                    <div className="flex flex-col text-3xl w-100 ">
                         <TreeNode id="root" position={"0"} name="根" children={leftTree} isLeaf={false} isCollapsed={false} side="left" />
                     </div>
                 </div>
                 <div className={divTailwindcss + " tree-list "} onScroll={updateXarrow}>
-                    <div className="flex flex-col text-3xl w-80">
+                    <div className="flex flex-col text-3xl w-100">
                         <TreeNode id="root" position={"0"} name="根" children={rightTree} isLeaf={false} isCollapsed={false} side="right" />
                     </div>
                 </div>

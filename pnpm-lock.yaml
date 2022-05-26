@@ -6,6 +6,7 @@ specifiers:
   '@types/react-dom': ^18.0.0
   '@vitejs/plugin-react': ^1.3.0
   ace-builds: ^1.4.14
+  nanoid: ^3.3.4
   react: ^18.0.0
   react-ace: ^10.1.0
   react-dom: ^18.0.0
@@ -17,6 +18,7 @@ specifiers:
 dependencies:
   '@arco-design/web-react': 2.32.2_r7chf25paampzx346vnsougjny
   ace-builds: 1.4.14
+  nanoid: 3.3.4
   react: 18.0.0
   react-ace: 10.1.0_zpnidt7m3osuk7shl3s4oenomq
   react-dom: 18.0.0_react@18.0.0
@@ -1248,11 +1250,10 @@ packages:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
 
-  /nanoid/3.3.3:
-    resolution: {integrity: sha512-p1sjXuopFs0xg+fPASzQ28agW1oHD7xDsd9Xkf3T15H3c/cifrFHVwrh74PdoklAPi+i7MdRsE47vm2r6JoB+w==}
+  /nanoid/3.3.4:
+    resolution: {integrity: sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
-    dev: true
 
   /node-fetch-native/0.1.3:
     resolution: {integrity: sha512-Jf1IQZdovUIv9E+5avmN6Sf+bND+rnMlODnBQhdE2VRyuWP9WgqZb/KEgPekh19DAN1X2C4vbS1VCOaz2OH19g==}
@@ -1348,7 +1349,7 @@ packages:
     resolution: {integrity: sha512-lg6eITwYe9v6Hr5CncVbK70SoioNQIq81nsaG86ev5hAidQvmOeETBqs7jm43K2F5/Ley3ytDtriImV6TpNiSg==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
-      nanoid: 3.3.3
+      nanoid: 3.3.4
       picocolors: 1.0.0
       source-map-js: 1.0.2
     dev: true
