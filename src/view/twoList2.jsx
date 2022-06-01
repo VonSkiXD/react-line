@@ -496,7 +496,14 @@ export function ListExample() {
             });
         });
         setXarrows(newXarrows);
-        if(maps.findIndex((m)=>selected.group===m.group)===-1){
+        if(selected.group&&maps.findIndex((m)=>selected.group===m.group)===-1){
+            for(let i in groupProperties){
+                if(groupProperties[i].group===selected.group){
+                    groupProperties.splice(i,1);
+                    break;
+                }
+            }
+            setGroupProperties(groupProperties);
             setSelected({});
         }
         updateXarrow();
@@ -624,7 +631,7 @@ export function ListExample() {
                 return;
             }
             for (let i in map) {
-                if (side === 'left' && map[i].start === id || side === 'right' && map[i] === id) {
+                if (side === 'left' && map[i].start === id || side === 'right' && map[i].end === id) {
                     map.splice(i, 1);
                     break;
                 }
