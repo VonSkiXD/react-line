@@ -409,7 +409,7 @@ export function ListExample() {
         }
     ]);
     //映射关系
-    const map = useRef([]);
+    const [map, setMap] = useState([]);
     //箭头
     const [xarrows, setXarrows] = useState([]);
     //选中状态
@@ -496,10 +496,13 @@ export function ListExample() {
             });
         });
         setXarrows(newXarrows);
+        if(maps.findIndex((m)=>selected.group===m.group)===-1){
+            setSelected({});
+        }
         updateXarrow();
     }
     useEffect(() => {
-        initXarrows(map.current);
+        initXarrows(map);
     }, []);
     const updateXarrow = useXarrow();
 
@@ -552,7 +555,7 @@ export function ListExample() {
                 }
             }
             setTree(tree);
-            initXarrows(map.current);
+            initXarrows(map);
         }
         const dropStartSelected = (event) => {
             event.dataTransfer.setData("group", selected.group);
@@ -592,13 +595,13 @@ export function ListExample() {
             }
 
             let isExist = false;
-            map.current.forEach(item => {
+            map.forEach(item => {
                 if (item.start === start && item.end === end) {
                     isExist = true;
                 }
             });
             if (!isExist) {
-                map.current.push({
+                map.push({
                     start: start,
                     end: end,
                     group: group
@@ -610,15 +613,31 @@ export function ListExample() {
                     p3: '',
                     p4: ''
                 });
-                // setMap(map);
+                setMap(map);
                 setGroupProperties(groupProperties);
-                initXarrows(map.current);
+                initXarrows(map);
             }
         }
+
+        const disLink = (id, side) => {
+            if(isEmptyStr(id)||isEmptyStr(side)){
+                return;
+            }
+            for (let i in map) {
+                if (side === 'left' && map[i].start === id || side === 'right' && map[i] === id) {
+                    map.splice(i, 1);
+                    break;
+                }
+            }
+            setMap(map);
+            initXarrows(map);
+        }
+
         const spaceLeft = (position) => {
             return position.split('-').length;
         }
         return (
+
             <div >
                 {
                     !leaf && id != 'root' &&
@@ -636,6 +655,12 @@ export function ListExample() {
                         style={{ paddingLeft: spaceLeft(position) + 2.8 + 'rem' }}
                         onDrop={dropItem} onDragOver={allowDrop}>
                         <div className='flex-grow'>{name}</div>
+                        {selected.group && -1 !== map.findIndex((m) => m.group === selected.group && ((side === 'left' && m.start === id) || (side === 'right' && m.end === id))) &&
+                            <Tooltip trigger='hover' mini content='删除关系'>
+                                <i className={'i mdi:link-variant-off  flex-none rounded-lg hover:bg-gray-300 text-gray-500'}
+                                    onClick={() => disLink(id, side)}></i>
+                            </Tooltip>
+                        }
                         <Tooltip trigger='hover' mini content='在已选择连接组下建立连接'>
                             <i className={'i mdi:link-variant  flex-none rounded-lg hover:bg-gray-300' + '' + (isEmptyStr(selected.group) ? ' text-gray-500' : '')}
                                 onDragStart={dropStartSelected} draggable={isEmptyStr(selected.group) ? "false" : "true"}></i>
@@ -663,7 +688,7 @@ export function ListExample() {
         changeProperty = (key, event) => {
             groupProperties.forEach(item => {
                 if (item.group === selected.group) {
-                    item.property[key] = event;
+                    item[key] = event;
                 }
             });
             this.setState({ ...this.state, [key]: event });
