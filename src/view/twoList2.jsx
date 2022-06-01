@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Xarrow, { useXarrow, Xwrapper } from 'react-xarrows';
 import { Input, Tooltip } from '@arco-design/web-react';
 
@@ -409,15 +409,14 @@ export function ListExample() {
         }
     ]);
     //映射关系
-    const [map, setMap] = useState([]);
+    const map = useRef([]);
     //箭头
     const [xarrows, setXarrows] = useState([]);
     //选中状态
-    const [hoverArrow,setHoverArrow] = useState(null);
     const [selected, setSelected] = useState({});
     const [properties, setProperties] = useState({});
     //组属性
-    const [groupProperties,setGroupProperties] = useState([]);
+    const [groupProperties, setGroupProperties] = useState([]);
 
     const isEmptyStr = (str) => {
         return str === '' || str === null || str === undefined;
@@ -500,23 +499,30 @@ export function ListExample() {
         updateXarrow();
     }
     useEffect(() => {
-        initXarrows(map);
+        initXarrows(map.current);
     }, []);
     const updateXarrow = useXarrow();
 
     const XarrowDiv = ({ xarrow }) => {
+        const [colorState, setColorState] = useState(false);
         const defProps = {
             passProps: {
                 className: 'xarrow',
-                onMouseEnter: () => {setHoverArrow(xarrow.group);console.log('in');},
-                onMouseLeave: () => {setHoverArrow(null);console.log('out');},
+                onMouseEnter: () => {
+                    setColorState(xarrow.group);
+                    // setHoverArrow(xarrow.group);  
+                },
+                onMouseLeave: () => {
+                    setColorState(null);
+                    // setHoverArrow(null);
+                },
                 onClick: (e) => {
                     e.stopPropagation();
                     if (!xarrow.isLeaf) {
                         return;
                     }
                     setSelected({ group: xarrow.group });
-                    setProperties(groupProperties.find(item =>item.group === xarrow.group));
+                    setProperties(groupProperties.find(item => item.group === xarrow.group));
                 },
                 cursor: 'pointer',
             },
@@ -526,7 +532,7 @@ export function ListExample() {
         const zIndex = 0;
         if (selected && selected.group === xarrow.group)
             color = '#5079F8';
-        if (hoverArrow && hoverArrow === xarrow.group)
+        if (colorState && colorState === xarrow.group)
             color = '#11279A';
         return (
             <Xarrow {...{ ...defProps, headSize, color, ...xarrow, zIndex }} />
@@ -546,7 +552,7 @@ export function ListExample() {
                 }
             }
             setTree(tree);
-            initXarrows(map);
+            initXarrows(map.current);
         }
         const dropStartSelected = (event) => {
             event.dataTransfer.setData("group", selected.group);
@@ -569,9 +575,9 @@ export function ListExample() {
             var dropId = event.dataTransfer.getData("dropId");
             var fromSide = event.dataTransfer.getData("dropSide");
             var group = event.dataTransfer.getData("group");
-            
+
             //强行拖动问题
-            if(dropId==null||dropId===""||group==null||group===""){
+            if (dropId == null || dropId === "" || group == null || group === "") {
                 return;
             }
 
@@ -586,27 +592,27 @@ export function ListExample() {
             }
 
             let isExist = false;
-            map.forEach(item => {
+            map.current.forEach(item => {
                 if (item.start === start && item.end === end) {
                     isExist = true;
                 }
             });
             if (!isExist) {
-                map.push({
+                map.current.push({
                     start: start,
                     end: end,
                     group: group
                 });
                 groupProperties.push({
-                    group:group,
-                    p1:'',
-                    p2:'',
-                    p3:'',
-                    p4:''
+                    group: group,
+                    p1: '',
+                    p2: '',
+                    p3: '',
+                    p4: ''
                 });
-                setMap(map);
+                // setMap(map);
                 setGroupProperties(groupProperties);
-                initXarrows(map);
+                initXarrows(map.current);
             }
         }
         const spaceLeft = (position) => {
@@ -631,8 +637,8 @@ export function ListExample() {
                         onDrop={dropItem} onDragOver={allowDrop}>
                         <div className='flex-grow'>{name}</div>
                         <Tooltip trigger='hover' mini content='在已选择连接组下建立连接'>
-                            <i className={'i mdi:link-variant  flex-none rounded-lg hover:bg-gray-300'+''+(isEmptyStr(selected.group)?' text-gray-500':'')}
-                                onDragStart={dropStartSelected} draggable={isEmptyStr(selected.group)?"false":"true"}></i>
+                            <i className={'i mdi:link-variant  flex-none rounded-lg hover:bg-gray-300' + '' + (isEmptyStr(selected.group) ? ' text-gray-500' : '')}
+                                onDragStart={dropStartSelected} draggable={isEmptyStr(selected.group) ? "false" : "true"}></i>
                         </Tooltip>
                         <Tooltip trigger='hover' mini content='创建新连接组并建立连接'>
                             <i className='i mdi:sitemap-outline ml-1 flex-none rounded-lg hover:bg-gray-300'
@@ -707,12 +713,18 @@ export function ListExample() {
             <Xwrapper>
                 <div className={divTailwindcss + " tree-list "} onScroll={updateXarrow}>
                     <div className="flex flex-col text-3xl w-100 ">
-                        <TreeNode id="root" position={"0"} name="根" children={leftTree} isLeaf={false} isCollapsed={false} side="left" />
+                        <TreeNode id="root" position={"0"} name="根"
+                            children={leftTree} isLeaf={false} isCollapsed={false} side="left"
+                            onMouseEnter={() => { setHoverArrow(null); console.log("in1") }}
+                        />
                     </div>
                 </div>
                 <div className={divTailwindcss + " tree-list "} onScroll={updateXarrow}>
                     <div className="flex flex-col text-3xl w-100">
-                        <TreeNode id="root" position={"0"} name="根" children={rightTree} isLeaf={false} isCollapsed={false} side="right" />
+                        <TreeNode id="root" position={"0"} name="根"
+                            children={rightTree} isLeaf={false} isCollapsed={false} side="right"
+                            onMouseEnter={() => { setHoverArrow(null); console.log("in2") }}
+                        />
                     </div>
                 </div>
                 <PropertyDiv key="propertydiv"
